@@ -9,11 +9,10 @@ phases:
       - echo Nothing to do in the pre_build phase...
   build:
     commands:
-      - echo Build started on `date`
-      - mvn install
+      - echo Build started 
   post_build:
     commands:
-      - echo Build completed on `date`
+      - echo Build completed 
 artifacts:
   files:
     - target/ttapp.jar
