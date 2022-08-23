@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tweetapp.entity.Like;
@@ -24,6 +25,7 @@ import com.tweetapp.service.TweetService;
 
 //@CrossOrigin(origins = "http://localhost:4200")
 @CrossOrigin(origins = "*")
+@RequestMapping("/api/v1.0/tweets")
 @RestController
 public class TweetController {
 
@@ -46,41 +48,41 @@ public class TweetController {
 
 	}
 
-	@PostMapping(value = "/api/v1.0/tweets/add")
+	@PostMapping(value = "/add")
 	public void postTweetReply(@Valid @RequestBody UserTweet userTweet) {
 		log.info("Adding the tweet");
 		UserTweet result = tweetService.postUserTweet(userTweet);
 
 	}
 
-	@DeleteMapping("/api/v1.0/tweets/delete/{tweetId}")
+	@DeleteMapping("/delete/{tweetId}")
 	public String DeleteTweet(@PathVariable String tweetId) {
 		log.info("Deleting all the tweets");
 		tweetService.deleteTweet(tweetId);
 		return "Deleted";
 	}
 
-	@PostMapping("/api/v1.0/tweets/myTweet")
+	@PostMapping("/myTweet")
 	public List<UserTweet> getUserTweet(@RequestBody Login login) {
 		log.info("Getting the  user tweet");
 		return tweetService.getUserTweet(login.getUserId());
 	}
 
-	@GetMapping("/api/v1.0/tweets/all")
+	@GetMapping("/all")
 	public List<UserTweet> getAllTweets() {
 		log.info("Getting all the tweets");
 		List<UserTweet> obj = tweetService.getAllTweet();
 		return obj;
 	}
 
-	@PostMapping("/api/v1.0/tweets/update")
+	@PostMapping("/update")
 	public void updateTweet(@RequestBody UserTweet userTweet) {
 		log.info("Upating the tweets");
 		tweetService.updateTweet(userTweet);
 
 	}
 
-	@PostMapping(value = "/api/v1.0/tweets/addLike")
+	@PostMapping(value = "/addLike")
 	public Like getLikeDetails(@RequestBody Like like) {
 		log.info("Liking the tweets");
 		Like result = tweetService.postLike(like);
@@ -88,7 +90,7 @@ public class TweetController {
 		return result;
 	}
 
-	@GetMapping("/api/v1.0/tweets/getLikes")
+	@GetMapping("/getLikes")
 	public List<Like> getAllLikes() {
 		log.info("Getting all the likes of a tweet");
 		return tweetService.getAllLikes();
@@ -101,7 +103,7 @@ public class TweetController {
 
 	}
 
-	@PostMapping(value = "/api/v1.0/tweets/reply")
+	@PostMapping(value = "/reply")
 	public String postTweetReply(@RequestBody TweetReply tweetReply) {
 		String response;
 		log.info("Replying to the tweets");
@@ -115,7 +117,7 @@ public class TweetController {
 		return response;
 	}
 
-	@PostMapping("/api/v1.0/tweets/getReply")
+	@PostMapping("/getReply")
 	public List<TweetReply> getAllReply(@RequestBody UserTweet usertweet) {
 		log.info("Getting all the replies of a tweet");
 		List<TweetReply> replies = tweetService.getAllReply(usertweet.getTweetId());
