@@ -15,7 +15,7 @@ phases:
       - echo Build completed 
 artifacts:
   files:
-    - target/ttapp.jar
+    - target/*.jar
   discard-paths: yes  
 
 
